@@ -1,0 +1,12 @@
+<h1>商品を追加する</h1>
+<%= form_for(@product) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+  <br>
+  <%= f.submit '追加' %>
+<% end %>
+
+<%= link_to '戻る', :back %>

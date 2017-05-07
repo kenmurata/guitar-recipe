@@ -1,0 +1,12 @@
+<h1>購入履歴を追加する</h1>
+<%= form_for(@purchase) do |f| %>
+  <%= f.label :user_id %>
+  <%= f.collection_select :user_id, User.all.order(:id), :id, :name %>
+  <br>
+  <%= f.label :product_id %>
+  <%= f.collection_select :product_id, Product.all.order(:id), :id, :name %>
+  <br>
+  <%= f.submit '追加' %>
+<% end %>
+
+<%= link_to '戻る', :back %>

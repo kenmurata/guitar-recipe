@@ -1,0 +1,12 @@
+<h1>購入履歴を編集する</h1>
+<%= form_for(@purchase) do |f| %>
+  <%= f.label :user_id %>
+  <%= f.text_field :user_id %>
+  <br>
+  <%= f.label :product_id %>
+  <%= f.text_field :product_id %>
+  <br>
+  <%= f.submit '編集' %>
+<% end %>
+
+<%= link_to 'TOP', purchases_path %>

@@ -1,0 +1,12 @@
+<h1>商品を編集する</h1>
+<%= form_for(@product) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :price %>
+  <%= f.text_field :price %>
+  <br>
+  <%= f.submit '編集' %>
+<% end %>
+
+<%= link_to 'TOP', products_path %>

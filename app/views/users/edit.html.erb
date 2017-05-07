@@ -1,0 +1,12 @@
+<h1>Userを編集する</h1>
+<%= form_for(@user) do |f| %>
+  <%= f.label :name %>
+  <%= f.text_field :name %>
+  <br>
+  <%= f.label :email %>
+  <%= f.text_field :email %>
+  <br>
+  <%= f.submit '編集' %>
+<% end %>
+
+<%= link_to 'TOP', users_path %>
