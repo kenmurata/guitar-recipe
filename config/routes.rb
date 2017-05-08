@@ -1,9 +1,12 @@
 Rails.application.routes.draw do
   
   root 'top#index'
-  resources :users, only: [:index, :new, :create, :edit, :update] do
+  resources :users, only: [:index, :new, :create, :edit, :update, :destroy] do
     member do
       get :history
+    end
+    collection do
+      post :import
     end
   end
   resources :products, only: [:index, :new, :create, :edit, :update] do

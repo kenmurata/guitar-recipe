@@ -3,6 +3,11 @@ class UsersController < ApplicationController
         @users = User.all.order(:id)
     end
     
+    def import
+        User.import(params[:file])
+        redirect_to root_path, notice: "importしました"
+    end
+    
     def new
         @user = User.new
     end
@@ -27,6 +32,12 @@ class UsersController < ApplicationController
         else
             redirect_to users_path, notice: '登録失敗'
         end
+    end
+    
+    def destroy
+        @user = User.find(params[:id])
+        @user.destroy
+        redirect_to root_path, notice: '削除しました'
     end
     
     def history

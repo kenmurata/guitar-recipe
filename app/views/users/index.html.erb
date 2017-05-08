@@ -6,6 +6,7 @@
     <th>メールアドレス</th>
     <th>編集する</th>
     <th>購入履歴</th>
+    <th>削除</th>
   </tr>
   <% @users.each do |user| %>
     <tr>
@@ -14,9 +15,18 @@
       <td><%= user.email %></td>
       <td><%= link_to '編集', edit_user_path(user.id) %></td>
       <td><%= link_to '購入履歴', history_user_path(user.id) %></td>
+      <td><%= link_to '削除', user_path(user.id), method: :delete, data: {confirm: '本当に削除していいですか？' }  %></td>
     </tr>
   <% end %>
 </table>
+<hr>
+<h3>ユーザのcsvインポート</h3>
+<p>形式: name,email<br>例: satoh,satoh@satoh.com</p>
+<%= form_tag import_users_path, multipart: true do %>
+  <%= file_field_tag :file %>
+  <%= submit_tag "import" %>
+<% end %>
+<br>
 
 <%= link_to 'ユーザの新規作成', new_user_path %>
 <br>
