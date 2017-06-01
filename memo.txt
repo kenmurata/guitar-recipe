@@ -1,0 +1,181 @@
+# coding: utf-8
+require 'csv'
+require 'kconv'
+require 'moji'
+
+class VpnInfosController < ApplicationController
+  before_action :set_vpn_info, only: [:show, :edit, :update, :destroy]
+
+  # GET /vpn_infos
+  # GET /vpn_infos.json
+  def index
+    ### デフォルトで作成される要素(id/updated_at/created_at)を除いて渡す
+    @vpn_info = VpnInfo.column_names.select{|a| a != "id" && a != "updated_at" && a != "created_at" }
+  end
+
+  # GET /vpn_infos/1
+  # GET /vpn_infos/1.json
+  def show
+  end
+
+  # GET /vpn_infos/new
+  def new
+    @vpn_info = VpnInfo.new
+  end
+
+  # GET /vpn_infos/1/edit
+  def edit
+  end
+
+  # POST /vpn_infos
+  # POST /vpn_infos.json
+  def create
+    @vpn_info = VpnInfo.new(vpn_info_params)
+
+    respond_to do |format|
+      if @vpn_info.save
+        format.html { redirect_to @vpn_info, notice: 'Vpn info was successfully created.' }
+        format.json { render :show, status: :created, location: @vpn_info }
+      else
+        format.html { render :new }
+        format.json { render json: @vpn_info.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /vpn_infos/1
+  # PATCH/PUT /vpn_infos/1.json
+  def update
+    respond_to do |format|
+      if @vpn_info.update(vpn_info_params)
+        format.html { redirect_to @vpn_info, notice: 'Vpn info was successfully updated.' }
+        format.json { render :show, status: :ok, location: @vpn_info }
+      else
+        format.html { render :edit }
+        format.json { render json: @vpn_info.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+# coding: utf-8
+require 'csv'
+require 'kconv'
+require 'moji'
+
+class VpnInfosController < ApplicationController
+  before_action :set_vpn_info, only: [:show, :edit, :update, :destroy]
+
+  # GET /vpn_infos
+  # GET /vpn_infos.json
+  def index
+    ### デフォルトで作成される要素(id/updated_at/created_at)を除いて渡す
+    @vpn_info = VpnInfo.column_names.select{|a| a != "id" && a != "updated_at" && a != "created_at" }
+  end
+
+  # GET /vpn_infos/1
+  # GET /vpn_infos/1.json
+  def show
+  end
+
+  # GET /vpn_infos/new
+  def new
+    @vpn_info = VpnInfo.new
+  end
+
+  # GET /vpn_infos/1/edit
+  def edit
+  end
+
+  # POST /vpn_infos
+  # POST /vpn_infos.json
+  def create
+    @vpn_info = VpnInfo.new(vpn_info_params)
+
+    respond_to do |format|
+      if @vpn_info.save
+        format.html { redirect_to @vpn_info, notice: 'Vpn info was successfully created.' }
+        format.json { render :show, status: :created, location: @vpn_info }
+      else
+        format.html { render :new }
+        format.json { render json: @vpn_info.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # PATCH/PUT /vpn_infos/1
+  # PATCH/PUT /vpn_infos/1.json
+  def update
+    respond_to do |format|
+      if @vpn_info.update(vpn_info_params)
+        format.html { redirect_to @vpn_info, notice: 'Vpn info was successfully updated.' }
+        format.json { render :show, status: :ok, location: @vpn_info }
+      else
+        format.html { render :edit }
+        format.json { render json: @vpn_info.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  # DELETE /vpn_infos/1
+  # DELETE /vpn_infos/1.json
+  def destroy
+    @vpn_info.destroy
+    respond_to do |format|
+      format.html { redirect_to vpn_infos_url, notice: 'Vpn info was successfully destroyed.' }
+      format.json { head :no_content }
+    end
+  end
+
+  ### add k_murata
+  ### GET /vpn_infos/search
+  def search
+    ### index.html.erb から入力されたパラメータでDBを検索
+    # ページング無し かつ 半角全角で検索結果が異なる#
+    #@results = VpnInfo.where("#{params[:column_id]} LIKE ?", "%#{params[:keyword][:input]}%")
+    @results = VpnInfo.where("#{params[:column_id]} LIKE ? or #{params[:column_id]} LIKE ? ","%#{Moji.zen_to_han(params[:keyword][:input])}%" ,"%#{Moji.han_to_zen(params[:keyword][:input])}%").page(params[:page])
+    @result_count = VpnInfo.where("#{params[:column_id]} LIKE ? or #{params[:column_id]} LIKE ? ","%#{Moji.zen_to_han(params[:keyword][:input])}%" ,"%#{Moji.han_to_zen(params[:keyword][:input])}%").count
+  end
+
+  ### add k_murata
+  ### GET /vpn_infos/ikkatsu
+  def ikkatsu
+  end
+  def import
+    begin
+      # csvファイルの情報をcsv_textに格納
+      csv_text = params[:file].read
+      #render :text => csv_text.read and return
+      # カンマの数を数えて、5個(6カラム)なければエラーを返す
+      #csv_text.each do |column|
+        #if true then
+          ##redirect_to root_url, alert: "VPN情報の追加に失敗しました。登録内容に不備がないかご確認ください。"
+          ##redirect_to root_url, alert: "aaaaa" and return
+        #end
+      #end
+      #return
+
+      # 途中にinvalidなデータがあった場合、全ての登録が失敗するように設定したい
+      ActiveRecord::Base.transaction do
+        CSV.parse(Kconv.toutf8(csv_text)) do |row|
+
+          # CSVデータを読込
+          vpn_info = VpnInfo.new
+          vpn_info.vpn_name = row[0]
+          vpn_info.wap_number = row[1]
+          vpn_info.vpn_number = row[2]
+          vpn_info.ha_ip = row[3]
+          vpn_info.cluster_id = row[4]
+          vpn_info.vlan_id = row[5]
+
+          # 保存する
+          vpn_info.save!
+        end
+      end
+    rescue
+      # csvファイル中にinvalidなデータがあった場合、全ての登録が失敗する
+      ActiveRecord::Rollback
+      redirect_to root_url, alert: "VPN情報の追加に失敗しました。登録内容に不備がないかご確認ください。"
+    else
+      redirect_to root_url, notice: "VPN情報の追加に成功しました"
+    end
+  end

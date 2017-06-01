@@ -9,9 +9,12 @@ Rails.application.routes.draw do
       post :import
     end
   end
-  resources :products, only: [:index, :new, :create, :edit, :update] do
-  end
-  resources :purchases, only: [:index, :new, :create, :edit, :update] do
+  resources :products, only: [:index, :new, :create, :edit, :update]
+  resources :purchases, only: [:index, :new, :create, :edit, :update]
+  resources :search, only: [:index] do
+    collection do
+      get :result
+    end
   end
   
   # The priority is based upon order of creation: first created -> highest priority.

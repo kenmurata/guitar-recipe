@@ -1,0 +1,10 @@
+<h1>search result</h1>
+検索結果: <%= @users.count %>件
+<% if @users.count != 0 %>
+  <% @users.each do |u| %>
+    <%= u.name %><br>
+    <%= u.email %>
+  <% end %>
+<% else %>
+  <p>no user</p>
+<% end %>
