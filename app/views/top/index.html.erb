@@ -1,9 +1,10 @@
 <h1>ギター会員管理データベース</h1>
-<h3>現在の会員数: <%= @users_num %></h3>
-<h3>現在の商品数: <%= @products_num %></h3>
-<br></br>
-<%= link_to 'ユーザー管理ページへ', users_path %>
-<%= link_to '商品管理ページへ', products_path %>
 <br>
+<h4>現在の会員数: <%= @users_num %></h4>
+<h4>現在の商品数: <%= @products_num %></h4>
+<hr>
+<h3>メニュー</h3>
+<%= link_to 'ユーザー管理ページへ', users_path %><br>
+<%= link_to '商品管理ページへ', products_path %><br>
 <%= link_to '購入履歴の登録', new_purchase_path %><br>
 <%= link_to '検索ページへ', search_index_path %>
