@@ -2,8 +2,9 @@
 <table border="3">
   <tr>
     <th>id</th>
-    <th>名前</th>
-    <th>メールアドレス</th>
+    <th>姓</th>
+    <th>名</th>
+    <th>メールアドレス1</th>
     <th>編集する</th>
     <th>購入履歴</th>
     <th>削除</th>
@@ -11,8 +12,9 @@
   <% @users.each do |user| %>
     <tr>
       <td><%= user.id %></td>
-      <td><%= user.name %></td>
-      <td><%= user.email %></td>
+      <td><%= user.fname %></td>
+      <td><%= user.lname %></td>
+      <td><%= user.email1 %></td>
       <td><%= link_to '編集', edit_user_path(user.id) %></td>
       <td><%= link_to '購入履歴', history_user_path(user.id) %></td>
       <td><%= link_to '削除', user_path(user.id), method: :delete, data: {confirm: '本当に削除していいですか？' }  %></td>

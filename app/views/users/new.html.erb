@@ -1,12 +1,74 @@
 <h1>Userを追加する</h1>
 <%= form_for(@user) do |f| %>
-  <%= f.label :name %>
-  <%= f.text_field :name %>
-  <br>
-  <%= f.label :email %>
-  <%= f.text_field :email %>
-  <br>
-  <%= f.submit '追加' %>
+<section class="container-fluid">
+  <div class="row"><div class="col-sm-11 col-md-6 col-lg-4">
+    <table class="table table-responsive">
+      <tr>
+        <td>姓(漢字)</td>
+        <td><%= f.text_field :fname %></td>
+      </tr>
+      <tr>
+        <td>名(漢字)</td>
+        <td><%= f.text_field :lname %></td>
+      </tr>
+      <tr>
+        <td>姓(カナ)</td>
+        <td><%= f.text_field :fname_kana %></td>
+      </tr>
+      <tr>
+        <td>名(カナ)</td>
+        <td><%= f.text_field :lname_kana %></td>
+      </tr>
+      <tr>
+        <td>メールアドレス1</td>
+        <td><%= f.text_field :email1 %></td>
+      </tr>
+      <tr>
+        <td>メールアドレス2</td>
+        <td><%= f.text_field :email2 %></td>
+      </tr>
+      <tr>
+        <td>性別</td>
+        <td><%= f.text_field :sex %></td>
+      </tr>
+      <tr>
+        <td>郵便番号</td>
+        <td><%= f.text_field :postal_code %></td>
+      </tr>
+      <tr>
+        <td>都道府県</td>
+        <!--td><%= f.text_field :prefecture %></td-->
+        <td><%= f.collection_select :prefecture, Prefecture.all, :id, :name %></td>
+      </tr>
+      <tr>
+        <td>住所</td>
+        <td><%= f.text_field :city %></td>
+      </tr>
+      <tr>
+        <td>電話番号</td>
+        <td><%= f.text_field :tel %></td>
+      </tr>
+      <tr>
+        <td>生年月日(YYYY/MM/DD 例1987/05/25)</td>
+        <td><%= f.text_field :birth %></td>
+      </tr>
+      <tr>
+        <td>ギター歴</td>
+        <td><%= f.text_field :history %>年</td>
+      </tr>
+      <tr>
+        <td>お持ちのギター本数</td>
+        <td><%= f.text_field :guitar_num %>本</td>
+      </tr>
+      <tr>
+        <td>お好きなジャンル</td>
+        <td><%= f.text_field :genre %>本</td>
+      </tr>
+      </div></div>
+    </table>
+  <%= f.submit '追加', :class => 'btn btn-primary' %>
+</section>
 <% end %>
 
+<br>
 <%= link_to '戻る', :back %>
