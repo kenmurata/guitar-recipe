@@ -1,6 +1,7 @@
 <h1>ユーザ検索</h1>
 <%= form_tag(result_search_index_path, :method => :get) do %>
-  名前<%= text_field_tag :name %><br>
-  メールアドレス<%= text_field_tag :email %><br>
+  名前<%= text_field_tag :fname %><br>
+  メールアドレス<%= text_field_tag :email1 %><br>
+  都道府県<%= collection_select(:prefecture, :name, Prefecture.all, :id, :name, :include_blank => true) %>
   <%= submit_tag "検索" %>
 <% end %>

@@ -29,7 +29,8 @@
       </tr>
       <tr>
         <td>性別</td>
-        <td><%= f.text_field :sex %></td>
+        <!--td><%= f.text_field :sex %></td-->
+        <td><%= f.select :sex, [['女性',0],['男性',1]] %></td>
       </tr>
       <tr>
         <td>郵便番号</td>
