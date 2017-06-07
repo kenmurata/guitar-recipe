@@ -8,14 +8,19 @@ class SearchController < ApplicationController
       @users = User.where(sql)
       
       # ユーザの情報を表示するためのカラムを準備
-      column = User.column_names
       @user_column = []
-      column.each do |c|
+      User.column_names.each do |c|
         if c == "id" || c == "created_at" || c == "updated_at"
         else
           @user_column.push c
         end
       end
+      
+      # 購入履歴を表示するための情報
+      @purchases = Purchase.all
+      #@product_names = Product.pluck(:id,:name)
+      @products = Product.all
+      
     end
     
     private

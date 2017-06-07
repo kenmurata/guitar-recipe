@@ -5,6 +5,10 @@
   <section class="container-fluid"><div class="row"><div class="col-sm-12 col-md-12 col-lg-12">
     <table class="table table-responsive">
       <tr>
+        <th colspan="15">ユーザ情報</th>
+        <th colspan="<%= @products.count %>">購入履歴</th>
+      </tr>
+      <tr>
         <th>姓(漢字)</th>
         <th>名(漢字)</th>
         <th>姓(カナ)</th>
@@ -22,14 +26,26 @@
         <th>ギター歴</th>
         <th>お持ちのギター本数</th>
         <th>お好きなジャンル</th>
+        <% @products.each do |product| %>
+          <th><%= product.name %></th>
+        <% end %>
       </tr>
       <% @users.each do |user| %>
         <tr>
           <% @user_column.each do |c| %>
-            <td>
-              <%= user[:"#{c}"] %>
-            </td>
+            <td><%= user[:"#{c}"] %></td>
           <% end %>
+          <% @purchases.each do |purchase| %>
+            <% if purchase.user_id == user.id %>
+              <% @products.each do |product| %>
+                <% if purchase.user_id == user.id && purchase.product_id == product.id %>
+                  <td>購入済み</td>
+                <% else %>
+                  <td>-</td>
+                <% end %>
+              <% end %> <!-- @products.each do |product| -->
+            <% end %> <!-- if purchaase.user_id == user.id -->
+          <% end %> <!-- @purchases.each do |purchase| -->
         </tr>
       <% end %>
     </table>
