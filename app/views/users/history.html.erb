@@ -1,4 +1,4 @@
-<h1><%= @user.name %>さんの購入履歴</h1>
+<h1><%= @user.fname %> <%= @user.lname %> さんの購入履歴</h1>
 <% if @purchases.count == 0 %>
   <p>購入履歴はありません</p>
 <% else %>
@@ -10,7 +10,7 @@
     <% @purchases.each do |p| %>
       <tr>
         <td><%= p.created_at.strftime('%Y/%m/%d_%H:%M:%S') %></td>
-        <td><%= @products[(p.product_id - 1)].name %></td>
+        <td><%= Product.find(p.product_id).name %></td>
       </tr>
     <% end %>
   </table>

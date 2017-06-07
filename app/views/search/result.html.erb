@@ -1,10 +1,39 @@
 <h1>search result</h1>
 検索結果: <%= @users.count %>件<br>
 <% if @users.count != 0 %>
-  <% @users.each do |u| %>
-    <%= u.name %>
-    <%= u.email %><br>
-  <% end %>
+  <!--section class="container-fluid"><div class="row"><div class="col-sm-11 col-md-8 col-lg-4"-->
+  <section class="container-fluid"><div class="row"><div class="col-sm-12 col-md-12 col-lg-12">
+    <table class="table table-responsive">
+      <tr>
+        <th>姓(漢字)</th>
+        <th>名(漢字)</th>
+        <th>姓(カナ)</th>
+        <th>名(カナ)</th>
+        <th>メールアドレス1</th>
+        <th>メールアドレス2</th>
+        <th>性別</th>
+        <!--td><%#= f.select :sex, [['女性',0],['男性',1]] %></td-->
+        <th>郵便番号</th>
+        <th>都道府県</th>
+        <!--td><%#= f.collection_select :prefecture, Prefecture.all, :id, :name %></td-->
+        <th>住所</th>
+        <th>電話番号</th>
+        <th>生年月日</th>
+        <th>ギター歴</th>
+        <th>お持ちのギター本数</th>
+        <th>お好きなジャンル</th>
+      </tr>
+      <% @users.each do |user| %>
+        <tr>
+          <% @user_column.each do |c| %>
+            <td>
+              <%= user[:"#{c}"] %>
+            </td>
+          <% end %>
+        </tr>
+      <% end %>
+    </table>
+  </div></div></section>
 <% else %>
   <p>no user</p>
 <% end %>

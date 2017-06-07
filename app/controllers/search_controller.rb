@@ -3,7 +3,19 @@ class SearchController < ApplicationController
     end
     def result
       sql = create_query(params)
+      
+      # ヒットしたユーザの一覧が@usersに入る
       @users = User.where(sql)
+      
+      # ユーザの情報を表示するためのカラムを準備
+      column = User.column_names
+      @user_column = []
+      column.each do |c|
+        if c == "id" || c == "created_at" || c == "updated_at"
+        else
+          @user_column.push c
+        end
+      end
     end
     
     private

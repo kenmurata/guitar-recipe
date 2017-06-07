@@ -1,21 +1,28 @@
 <h1>商品一覧</h1>
-<table border="3">
-  <tr>
-    <th>id</th>
-    <th>品名</th>
-    <th>価格</th>
-    <th>編集する</th>
-  </tr>
-  <% @products.each do |product| %>
-    <tr>
-      <td><%= product.id %></td>
-      <td><%= product.name %></td>
-      <td><%= product.price %></td>
-      <td><%= link_to '編集', edit_product_path(product.id) %></td>
-    </tr>
-  <% end %>
-</table>
-
+<section class="container-fluid">
+  <div class="row"><div class="col-sm-12 col-md-6 col-lg-4">
+    <table class="table table-responsive">
+      <tr>
+        <th>id</th>
+        <th>品名</th>
+        <th>価格</th>
+        <th>カテゴリー</th>
+        <th>リリース日</th>
+        <th>編集する</th>
+      </tr>
+      <% @products.each do |product| %>
+        <tr>
+          <td><%= product.id %></td>
+          <td><%= product.name %></td>
+          <td><%= product.price %></td>
+          <td><%= product.category %></td>
+          <td><%= product.release %></td>
+          <td><%= link_to '編集', edit_product_path(product.id) %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div></div>
+</section>
 <%= link_to '商品の追加', new_product_path %>
 <br>
 <%= link_to 'TOP', root_path %>
