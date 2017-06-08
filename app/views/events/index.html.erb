@@ -1,0 +1,31 @@
+<h1>イベント一覧</h1>
+<section class="container-fluid"><div class="row"><div class="col-sm-12">
+<table class="table table-responsive">
+  <tr>
+    <th>イベント名</th>
+    <th>カテゴリ</th>
+    <th>価格</th>
+    <th>追加料金</th>
+    <th>実施日</th>
+    <th>支出</th>
+    <th>収入</th>
+    <th>編集する</th>
+  </tr>
+  <% @events.each do |event| %>
+    <tr>
+      <td><%= event.name %></td>
+      <td><%= event.category %></td>
+      <td><%= event.price %></td>
+      <td><%= event.add_price %></td>
+      <td><%= event.day %></td>
+      <td><%= event.expense %></td>
+      <td><%= event.income %></td>
+      <td><%= link_to '編集', edit_event_path(event.id) %></td>
+    </tr>
+  <% end %>
+</table>
+</div></div></section>
+
+<%= link_to 'イベントの新規作成', new_event_path , :class => 'btn btn-primary' %>
+<%= link_to '戻る' , :back, :class => 'btn btn-default' %>
+<%= link_to 'TOP' , root_path, :class => 'btn btn-default' %>

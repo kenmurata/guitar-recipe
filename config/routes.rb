@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       post :import
     end
   end
+  resources :events, only: [:index, :new, :create, :edit, :update]
   resources :products, only: [:index, :new, :create, :edit, :update]
   resources :purchases, only: [:index, :new, :create, :edit, :update]
   resources :search, only: [:index] do

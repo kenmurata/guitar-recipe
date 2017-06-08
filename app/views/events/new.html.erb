@@ -1,0 +1,40 @@
+<h1>イベントを追加する</h1>
+<%= form_for(@event) do |f| %>
+<section class="container-fluid"><div class="row">
+  <div class="col-sm-12 col-md-6 col-lg-4">
+    <table class="table table-default">
+      <tr>
+        <td><%= f.label "イベント名" %></td>
+        <td><%= f.text_field :name %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "カテゴリ" %></td>
+        <td><%= f.text_field :category %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "価格" %></td>
+        <td><%= f.text_field :price %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "追加料金" %></td>
+        <td><%= f.text_field :add_price %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "実施日" %></td>
+        <td><%= f.date_field :day %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "支出" %></td>
+        <td><%= f.text_field :expense %></td>
+      </tr>
+      <tr>
+        <td><%= f.label "収入" %></td>
+        <td><%= f.text_field :income %></td>
+      </tr>
+    </table>
+    <%= f.submit '追加', :class => 'btn btn-primary' %>
+    <%= link_to '戻る' , :back, :class => 'btn btn-default' %>
+    <%= link_to 'TOP' , root_path, :class => 'btn btn-default' %>
+  </div>
+<% end %>
+</div></section>
