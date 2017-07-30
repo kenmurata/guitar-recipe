@@ -2,9 +2,7 @@ class Paypal < ActiveRecord::Base
   require 'kconv'
   
   def self.import(file)
-    puts 'import simasu'
     begin
-      puts 'import simasu2'
       csv_text = file.read
       #ActiveRecord::Base.transaction do
         CSV.parse(Kconv.toutf8(csv_text), headers: true, return_headers: false) do |row|
@@ -38,8 +36,7 @@ class Paypal < ActiveRecord::Base
             if Product.find_by(:paypal_product_id => row[16]) == nil
               product = Product.new
               
-              product.price = row[9].gsub(',','').to_i
-              product.fee = row[8]
+              product.price = row[7].gsub(',','').to_i
               product.title = row[15]
               product.paypal_product_id = row[16]
               
@@ -60,7 +57,8 @@ class Paypal < ActiveRecord::Base
               purchase.transaction_type = row[4]
               purchase.status = row[5]
               purchase.currency = row[6]
-              purchase.payment_amount = row[7]
+              purchase.fee = row[8].gsub(',','').to_i
+              purchase.payment_amount = row[9].gsub(',','').to_i
               purchase.paypal_transaction_id = row[12]
               purchase.shipping_fee = row[17]
               purchase.insurance_amount = row[18]

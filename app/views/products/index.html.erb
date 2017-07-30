@@ -6,7 +6,6 @@
         <th>id</th>
         <th>品名</th>
         <th>価格</th>
-        <th>手数料</th>
         <th>ペイパル上の商品ID</th>
         <th>編集する</th>
       </tr>
@@ -15,7 +14,6 @@
           <td><%= product.id %></td>
           <td><%= product.title %></td>
           <td><%= product.price %></td>
-          <td><%= product.fee %></td>
           <td><%= product.paypal_product_id %></td>
           <td><%= link_to '編集', edit_product_path(product.id) %></td>
         </tr>
