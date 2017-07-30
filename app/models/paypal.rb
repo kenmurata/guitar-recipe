@@ -18,7 +18,11 @@ class Paypal < ActiveRecord::Base
               user.name = row[3]
               user.email = row[10]
               user.shipping_address = row[13]
-              user.address_status = row[14]
+              if row[14] == '確認済み' 
+                user.address_status = true
+              else
+                user.address_status = false
+              end
               user.address_1st_line = row[30]
               user.address_2nd_line = row[31]
               user.municipality = row[32]
@@ -34,7 +38,7 @@ class Paypal < ActiveRecord::Base
             if Product.find_by(:paypal_product_id => row[16]) == nil
               product = Product.new
               
-              product.price = row[9]
+              product.price = row[9].gsub(',','').to_i
               product.fee = row[8]
               product.title = row[15]
               product.paypal_product_id = row[16]
