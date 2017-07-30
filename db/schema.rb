@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170724085945) do
+ActiveRecord::Schema.define(version: 20170730065942) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -132,19 +132,41 @@ ActiveRecord::Schema.define(version: 20170724085945) do
   end
 
   create_table "products", force: :cascade do |t|
-    t.string   "name",       null: false
-    t.integer  "price",      null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.string   "category"
-    t.date     "release"
+    t.integer  "price",             null: false
+    t.integer  "fee",               null: false
+    t.text     "title",             null: false
+    t.text     "paypal_product_id", null: false
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
   end
 
   create_table "purchases", force: :cascade do |t|
-    t.integer  "user_id",    null: false
-    t.integer  "product_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.time     "time"
+    t.string   "timezone"
+    t.string   "transaction_type"
+    t.string   "status"
+    t.string   "currency"
+    t.string   "payment_amount"
+    t.string   "paypal_transaction_id",    null: false
+    t.integer  "shipping_fee"
+    t.string   "insurance_amount"
+    t.integer  "tax"
+    t.string   "option1_name"
+    t.string   "option1_price"
+    t.string   "option2_name"
+    t.string   "option2_price"
+    t.string   "reference_transaction_id"
+    t.string   "invoice_number"
+    t.string   "custom_number"
+    t.integer  "amount"
+    t.string   "receipt_id"
+    t.integer  "balance"
+    t.string   "subject"
+    t.string   "remark"
+    t.datetime "created_at",               null: false
+    t.datetime "updated_at",               null: false
+    t.integer  "user_id"
+    t.integer  "product_id"
   end
 
   create_table "sources", force: :cascade do |t|
@@ -154,23 +176,22 @@ ActiveRecord::Schema.define(version: 20170724085945) do
   end
 
   create_table "users", force: :cascade do |t|
-    t.datetime "created_at",  null: false
-    t.datetime "updated_at",  null: false
-    t.string   "fname",       null: false
-    t.string   "lname",       null: false
-    t.string   "fname_kana"
-    t.string   "lname_kana"
-    t.boolean  "sex"
-    t.string   "email1",      null: false
-    t.string   "email2"
-    t.string   "postal_code", null: false
-    t.string   "prefecture",  null: false
-    t.string   "city",        null: false
-    t.string   "tel",         null: false
-    t.date     "birth"
-    t.integer  "history"
-    t.integer  "guitar_num"
-    t.text     "genre"
+    t.string   "name"
+    t.string   "email",                               null: false
+    t.string   "shipping_addres"
+    t.boolean  "address_status",      default: false
+    t.string   "address_1st_line"
+    t.string   "address_second_line"
+    t.string   "municipality"
+    t.string   "prefecture"
+    t.string   "postal_code"
+    t.string   "country_name"
+    t.string   "country_code"
+    t.datetime "created_at",                          null: false
+    t.datetime "updated_at",                          null: false
+    t.string   "telephone_number"
+    t.string   "shipping_address"
+    t.string   "address_2nd_line"
   end
 
 end

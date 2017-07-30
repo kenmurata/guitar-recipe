@@ -9,30 +9,4 @@
       <% end %>
     </div>
   </div>
-  
-  <hr>
-  
-  <div class="row">
-    <div class="col-sm-12">
-      <h1>ペイパル履歴一覧</h1>
-      <table class="table table-bordered table-hover table-striped">
-        <tr>
-          <% @paypal_column.each do |column| %>
-            <% unless column == 'id' || column == '' %>
-              <th><%= column %></th>
-            <% end %>
-          <% end %>
-        </tr>
-        <% @paypals.each do |paypal| %>
-          <tr>
-            <% @paypal_column.each do |column| %>
-              <% unless column == 'id' %>
-                <td><%= paypal[column] %></td>
-              <% end %>
-            <% end %>
-          </tr>
-        <% end %>
-      </table>
-    </div>
-  </div>
 </div>
