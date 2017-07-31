@@ -9,10 +9,10 @@ class PaypalsController < ApplicationController
   def import
     
     # 結果を表示するためのカウンタ
-    total_column = 0
-    user_num = 0
-    product_num = 0
-    purchase_num = 0
+    @total_column = 0
+    @user_num = 0
+    @product_num = 0
+    @purchase_num = 0
     
     csv_text = params[:file].read
     CSV.parse(Kconv.toutf8(csv_text), headers: true, return_headers: false) do |row|
@@ -21,12 +21,12 @@ class PaypalsController < ApplicationController
       ### とりあえずは無視する。いずれそれ用の処理も入れる必要あり。(paypalの残金を管理する場合必要。)
       if row[4] == 'ウェブペイメント'
         
-        total_column += 1
+        @total_column += 1
         
         if User.find_by(:email => row[10]) == nil
           
           # 結果を表示するためにカウンタをインクリメント
-          user_num += 1
+          @user_num += 1
           
           # 新規オブジェクト作成
           user = User.new
@@ -55,7 +55,7 @@ class PaypalsController < ApplicationController
         if Product.find_by(:paypal_product_id => row[16]) == nil
           
           # カウンタのインクリ
-          product_num += 1
+          @product_num += 1
           
           # 新規オブジェクト作成
           product = Product.new
@@ -71,7 +71,7 @@ class PaypalsController < ApplicationController
         if Purchase.find_by(:paypal_transaction_id => row[12]) == nil
           
           # カウンタのインクリ
-          product_num += 1
+          @purchase_num += 1
           
           # 新規オブジェクト作成
           purchase = Purchase.new
@@ -112,7 +112,8 @@ class PaypalsController < ApplicationController
       end   # if row[4] == 'ウェブペイメント'
     end     #CSV.parse
     
-    redirect_to root_path, notice: 'import完了!'
+    @result = '成功'
+    
   end       #def import
   
 end

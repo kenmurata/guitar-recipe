@@ -2,32 +2,17 @@
 検索結果: <%= @users.count %>件<br>
 <% if @users.count != 0 %>
   <section class="container-fluid"><div class="row"><div class="col-sm-12 col-md-12 col-lg-12">
-    <table class="table table-hover">
+    <table class="table table-hover table-bordered">
       <thead class="thead-default">
         <tr>
-          <th colspan="15">ユーザ情報</th>
-          <th colspan="<%= @products.count %>">購入履歴</th>
+          <th colspan="2" class="info">ユーザ情報</th>
+          <th colspan="<%= @products.count %>" class="warning">購入履歴</th>
         </tr>
         <tr>
-          <th>姓(漢字)</th>
-          <th>名(漢字)</th>
-          <th>姓(カナ)</th>
-          <th>名(カナ)</th>
-          <th>性別</th>
-          <th>メールアドレス1</th>
-          <th>メールアドレス2</th>
-          <!--td><%#= f.select :sex, [['女性',0],['男性',1]] %></td-->
-          <th>郵便番号</th>
-          <th>都道府県</th>
-          <!--td><%#= f.collection_select :prefecture, Prefecture.all, :id, :name %></td-->
-          <th>住所</th>
-          <th>電話番号</th>
-          <th>生年月日</th>
-          <th>ギター歴</th>
-          <th>お持ちのギター本数</th>
-          <th>お好きなジャンル</th>
+          <th class="info">名前</th>
+          <th class="info">メールアドレス</th>
           <% @products.each do |product| %>
-            <th><%= product.name %></th>
+            <th class="warning"><%= product.title %></th>
           <% end %>
         </tr>
       </thead>
@@ -37,9 +22,11 @@
         <!-- ### ここからテーブルの1列 ###-->
         <tr>
           <!--### ユーザの属性を表示 ###-->
-          <% @user_column.each do |c| %>
-            <td><%= user[:"#{c}"] %></td>
-          <% end %>
+          <%# @user_column.each do |c| %>
+            <td><%= link_to user.name, user_path(user.id) %></td>
+            <td><%= link_to user.email, user_path(user.id) %></td>
+            <!--<td><%#= user[:"#{c}"] %></td>-->
+          <%# end %>
           
           <!--### ユーザの購入履歴を表示 ###-->
           <% @purchases.each do |purchase| %>

@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   
   root 'top#index'
-  resources :users, only: [:index, :new, :create, :edit, :update, :destroy] do
+  resources :users do
     member do
       get :history
     end

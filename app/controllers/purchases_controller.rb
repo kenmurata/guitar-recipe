@@ -1,6 +1,6 @@
 class PurchasesController < ApplicationController
     def index
-        @purchases = Purchase.all.order(:id)
+        @purchases = Purchase.all.order('id desc')
     end
     
     def new

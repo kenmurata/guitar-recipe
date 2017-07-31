@@ -1,0 +1,44 @@
+<div class="container-fluid">
+  <div class="row">
+    <div class="col-sm-12 col-lg-12">
+      <h1>ユーザ情報詳細</h1>
+      <table class="table table-hover table-bordered">
+        <tr class="info">
+          <th>id</th>
+          <th>名前</th>
+          <th>メールアドレス</th>
+          <th>送付先住所</th>
+          <th>住所ステータス</th>
+          <th>住所1行目</th>
+          <th>住所2行目</th>
+          <th>市区町村</th>
+          <th>都道府県</th>
+          <th>郵便番号</th>
+          <th>国</th>
+          <th>国コード</th>
+          <th>電話番号</th>
+          <th>編集</th>
+          <th>削除</th>
+        </tr>
+        <tr>
+         <td><%= @user.id %></td>
+         <td><%= @user.name %></td>
+         <td><%= @user.email %></td>
+         <td><%= @user.shipping_address %></td>
+         <td><%= @user.address_status %></td>
+         <td><%= @user.address_1st_line %></td>
+         <td><%= @user.address_2nd_line %></td>
+         <td><%= @user.municipality %></td>
+         <td><%= @user.prefecture %></td>
+         <td><%= @user.postal_code %></td>
+         <td><%= @user.country_name %></td>
+         <td><%= @user.country_code %></td>
+         <td><%= @user.telephone_number %></td>
+         <td><%= link_to '編集', edit_user_path(@user.id) %></td>
+         <!--<td><%#= link_to '購入履歴', history_user_path(user.id) %></td>-->
+         <td><%= link_to '削除', user_path(@user.id), method: :delete, data: {confirm: '本当に削除していいですか？' }  %></td> 
+        </tr>
+      </table>
+    </div>
+  </div>
+</div>

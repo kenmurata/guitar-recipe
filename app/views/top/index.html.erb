@@ -5,4 +5,15 @@
   <h4>現在の会員数: <%= @users_num %></h4>
   <h4>現在の商品数: <%= @products_num %></h4>
   <h4>現在のイベント数: <%= @events_num %></h4>
+  <hr>
+  <div class="row">
+    <div class="col-sm-12">
+      <h3>ペイパル履歴からのインポート</h3>
+      <%= form_tag import_paypals_path, multipart: true do %>
+          <%= file_field_tag :file %>
+        <br>
+        <%= submit_tag 'インポート', :class => 'btn btn-primary' %>
+      <% end %>
+    </div>
+  </div>
 </section>

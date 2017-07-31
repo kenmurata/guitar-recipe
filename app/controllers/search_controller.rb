@@ -5,7 +5,8 @@ class SearchController < ApplicationController
       sql = create_query(params)
       
       # ヒットしたユーザの一覧が@usersに入る
-      @users = User.where(sql)
+      #@users = User.where(sql)
+      @users = User.where(sql).order('id desc')
       
       # ユーザの情報を表示するためのカラムを準備
       @user_column = []
@@ -15,6 +16,8 @@ class SearchController < ApplicationController
           @user_column.push c
         end
       end
+      
+      p @user_column
       
       # 購入履歴を表示するための情報
       @purchases = Purchase.all
