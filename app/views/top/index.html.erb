@@ -5,6 +5,7 @@
   <h4>現在の会員数: <%= @users_num %></h4>
   <h4>現在の商品数: <%= @products_num %></h4>
   <h4>現在のイベント数: <%= @events_num %></h4>
+  <%= link_to '全件削除', top_path, :class => 'btn btn-danger', :method => 'delete', data: {confirm: '本当に削除していいですか？' }  %>
   <hr>
   <div class="row">
     <div class="col-sm-12">

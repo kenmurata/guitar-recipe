@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   
   root 'top#index'
+  delete 'top' => 'top#alldelete'
+  
   resources :users do
     member do
       get :history
