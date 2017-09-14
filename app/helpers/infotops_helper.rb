@@ -1,0 +1,2 @@
+module InfotopsHelper
+end

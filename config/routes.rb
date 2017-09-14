@@ -2,6 +2,8 @@ Rails.application.routes.draw do
   
   root 'top#index'
   delete 'top' => 'top#alldelete'
+  post 'paypals/import' => 'paypals#import'
+  post 'infotops/import' => 'infotops#import'
   
   resources :users do
     member do
@@ -17,11 +19,6 @@ Rails.application.routes.draw do
   resources :search, only: [:index] do
     collection do
       get :result
-    end
-  end
-  resources :paypals, only: [:index, :destroy] do
-    collection do
-      post :import
     end
   end
   

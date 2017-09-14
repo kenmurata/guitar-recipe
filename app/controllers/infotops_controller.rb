@@ -1,0 +1,2 @@
+class InfotopsController < ApplicationController
+end

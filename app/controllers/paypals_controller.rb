@@ -2,10 +2,6 @@ class PaypalsController < ApplicationController
   
   require 'kconv'
   
-  # 画面を表示するだけ
-  def index
-  end
-  
   def import
     
     # 結果を表示するためのカウンタ

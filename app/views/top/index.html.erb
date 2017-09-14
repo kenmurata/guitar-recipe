@@ -10,7 +10,7 @@
   <div class="row">
     <div class="col-sm-12">
       <h3>ペイパル履歴からのインポート</h3>
-      <%= form_tag import_paypals_path, multipart: true do %>
+      <%= form_tag paypals_import_path, multipart: true do %>
           <%= file_field_tag :file %>
         <br>
         <%= submit_tag 'インポート', :class => 'btn btn-primary' %>
