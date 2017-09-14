@@ -10,10 +10,12 @@
   <div class="row">
     <div class="col-sm-12">
       <h3>ペイパル履歴からのインポート</h3>
-      <%= form_tag paypals_import_path, multipart: true do %>
+      <%#= form_tag paypals_import_path, multipart: true do %>
+      <%= form_tag csv_import_path, multipart: true do %>
           <%= file_field_tag :file %>
         <br>
-        <%= submit_tag 'インポート', :class => 'btn btn-primary' %>
+        <%= submit_tag 'paypal', :class => 'btn btn-primary' %>
+        <%= submit_tag 'infotop', :class => 'btn btn-primary' %>
       <% end %>
     </div>
   </div>

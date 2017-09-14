@@ -2,15 +2,13 @@ Rails.application.routes.draw do
   
   root 'top#index'
   delete 'top' => 'top#alldelete'
+  post 'csv/import' => 'csv#import'
   post 'paypals/import' => 'paypals#import'
   post 'infotops/import' => 'infotops#import'
   
   resources :users do
     member do
       get :history
-    end
-    collection do
-      post :import
     end
   end
   resources :events, only: [:index, :new, :create, :edit, :update]

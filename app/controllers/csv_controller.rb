@@ -1,4 +1,4 @@
-class InfotopsController < ApplicationController
+class CsvController < ApplicationController
   
   require 'kconv'
   
@@ -57,7 +57,7 @@ class InfotopsController < ApplicationController
           product = Product.new
           
           # パラメータの代入
-          product.price = row[7].gsub(',','').to_i
+          #product.price = row[7].gsub(',','').to_i
           product.title = row[15]
           product.paypal_product_id = row[16]
           
