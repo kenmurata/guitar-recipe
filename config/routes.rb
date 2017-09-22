@@ -1,21 +1,31 @@
 Rails.application.routes.draw do
   
+  # TOP画面
   root 'top#index'
-  delete 'top' => 'top#alldelete'
-  post 'csv/import' => 'csv#import'
-  post 'paypals/import' => 'paypals#import'
-  post 'infotops/import' => 'infotops#import'
   
+  # 全件削除(開発時の一時的な内容。リリース時に削除する)
+  delete 'top' => 'top#alldelete'
+  
+  # CSVからの取り込み
+  post 'csv/import' => 'csv#import'
+
+  # ユーザ情報のルーティング
+  # (暗黙的にindex,create,new,edit,update,deleteが指定される)
   resources :users do
     member do
+      # 購入履歴を表示する
       get :history
     end
   end
+  
   resources :events, only: [:index, :new, :create, :edit, :update]
   resources :products, only: [:index, :new, :create, :edit, :update]
   resources :purchases, only: [:index, :new, :create, :edit, :update]
+  
+  # ユーザ検索
   resources :search, only: [:index] do
     collection do
+      # 検索結果の表示
       get :result
     end
   end

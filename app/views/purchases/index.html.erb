@@ -3,15 +3,19 @@
 <table class="table table-hover table-bordered">
   <tr class="info">
     <th>id</th>
+    <th>購入日</th>
     <th>購入者メールアドレス</th>
     <th>商品番号</th>
+    <th>購入価格</th>
     <th>編集する</th>
   </tr>
   <% @purchases.each do |purchase| %>
     <tr>
       <td><%= purchase.id %></td>
+      <td><%= purchase.time %></td>
       <td><%= purchase.user.email %></td>
       <td><%= purchase.product.title %></td>
+      <td><%= purchase.price %></td>
       <td><%= link_to '編集', edit_purchase_path(purchase.id) %></td>
     </tr>
   <% end %>
