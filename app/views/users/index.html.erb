@@ -2,40 +2,28 @@
 <section class="container-fluid"><div class="row"><div class="col-sm-12 col-md-12 col-lg-12">
   <table class="table table-hover table-bordered">
     <tr class="info">
-      <th>id</th>
-      <th>名前</th>
       <th>メールアドレス</th>
-      <th>送付先住所</th>
-      <th>住所ステータス</th>
-      <th>住所1行目</th>
-      <th>住所2行目</th>
-      <th>市区町村</th>
+      <th>名前</th>
       <th>都道府県</th>
+      <th>市区町村</th>
+      <th>住所1行目</th>
       <th>郵便番号</th>
-      <th>国</th>
-      <th>国コード</th>
       <th>電話番号</th>
       <th>詳細</th>
     </tr>
     <% @users.each do |user| %>
       <tr>
-        <td><%= user.id %></td>
-        <td><%= user.name %></td>
         <td><%= user.email %></td>
-        <td><%= user.shipping_address %></td>
-        <td><%= user.address_status %></td>
-        <td><%= user.address_1st_line %></td>
-        <td><%= user.address_2nd_line %></td>
-        <td><%= user.municipality %></td>
+        <td><%= user.name %></td>
         <td><%= user.prefecture %></td>
+        <td><%= user.municipality %></td>
+        <td><%= user.address_1st_line %></td>
         <td><%= user.postal_code %></td>
-        <td><%= user.country_name %></td>
-        <td><%= user.country_code %></td>
         <td><%= user.telephone_number %></td>
         <td><%= link_to '詳細', user_path(user.id) %></td>
       </tr>
     <% end %>
   </table>
 </div></div></section>
-<%= link_to '新規作成', new_user_path , :class => 'btn btn-primary' %>
+<!--<%= link_to '新規作成', new_user_path , :class => 'btn btn-primary' %>-->
 <%= link_to 'TOP', root_path, :class => 'btn btn-default' %>

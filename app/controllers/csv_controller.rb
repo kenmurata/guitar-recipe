@@ -10,8 +10,13 @@ class CsvController < ApplicationController
     @product_num = 0
     @purchase_num = 0
     
-    puts "#{params[:commit]}"
     
+    ### ファイルが空の場合、エラーを返す
+    if params[:file] == nil
+      redirect_to root_path ,alert: 'ファイルを指定してください'
+      return
+    end
+      
     csv_text = params[:file].read
     CSV.parse(Kconv.toutf8(csv_text), headers: true, return_headers: false) do |row|
       
@@ -116,6 +121,8 @@ class CsvController < ApplicationController
             purchase.save!
           end
         end
+        
+        
       ################################################
       # ここからinfotopの処理
       ################################################
@@ -133,19 +140,10 @@ class CsvController < ApplicationController
           # パラメータの代入
           user.name = row[3]
           user.email = row[4]
-          #user.shipping_address = row[13]
-          #if row[14] == '確認済み' 
-            #user.address_status = true
-          #else
-            #user.address_status = false
-          #end
           user.address_1st_line = row[12]
-          #user.address_2nd_line = row[31]
           user.municipality = row[11]
           user.prefecture = row[10]
           user.postal_code = row[13]
-          ##user.country_name = row[35]
-          #user.country_code = row[39]
           user.telephone_number = row[14]
             
           user.save!
@@ -191,36 +189,18 @@ class CsvController < ApplicationController
           purchase.user_id = user_id
           purchase.product_id = product_id
           purchase.time = Time.parse(row[0])
-          #purchase.timezone = row[2]
-          #purchase.transaction_type = row[4]
-          #purchase.status = row[5]
-          #purchase.currency = row[6]
-          #purchase.fee = row[8].gsub(',','').to_i
-          #purchase.payment_amount = row[9].gsub(',','').to_i
+          #infotopの購入履歴には数量がないため、1固定(という意味のはず)
+          purchase.payment_amount = 1 
           purchase.paypal_transaction_id = row[5]
           purchase.shipping_fee = row[9]
-          #purchase.insurance_amount = row[18]
-          #purchase.tax = row[19]
-          #purchase.option1_name = row[20]
-          #purchase.option1_price = row[21]
-          #purchase.option2_name = row[22]
-          #purchase.option2_price = row[23]
-          #purchase.reference_transaction_id = row[24]
-          #purchase.invoice_number = row[25]
-          #purchase.custom_number = row[26]
-          #purchase.amount = row[27]
-          #purchase.receipt_id = row[28]
-          #purchase.balance = row[29]
-          #purchase.subject = row[37]
-          #purchase.remark = row[38]
               
           purchase.price = row[8].to_i
               
           purchase.save!
             
         end
-      end   # if row[4] == 'ウェブペイメント'
-    end     #CSV.parse
+      end
+    end
     
     @result = '成功'
     
