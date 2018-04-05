@@ -1,4 +1,4 @@
-class CreateProducts < ActiveRecord::Migration
+class ModProducts < ActiveRecord::Migration
   def change
     create_table :products do |t|
 

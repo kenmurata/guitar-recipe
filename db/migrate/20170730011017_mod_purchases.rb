@@ -1,4 +1,4 @@
-class CreatePurchases < ActiveRecord::Migration
+class ModPurchases < ActiveRecord::Migration
   def change
     create_table :purchases do |t|
       
