@@ -71,6 +71,7 @@ class SearchController < ApplicationController
         key.each do |k|
           sql.push k
         end
+        print sql
         return sql
       end
 end

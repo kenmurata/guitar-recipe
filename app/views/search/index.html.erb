@@ -11,10 +11,10 @@
           <td>メールアドレス</td>
           <td><%= text_field_tag :email %></td>
         </tr>
-        <tr>
+        <!--<tr>
           <td>都道府県</td>
           <td><%= collection_select(:prefecture, :name, Prefecture.all, :id, :name, :include_blank => true) %></td>
-        </tr>
+        </tr>-->
       </table>
       <%= submit_tag "検索" , :class => 'btn btn-primary' %>
       <%= link_to '戻る' , :back, :class => 'btn btn-default' %>
