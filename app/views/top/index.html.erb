@@ -1,25 +1,80 @@
-<%= notice %>
-<% if alert %>
-  <text class="text-danger"><%= alert %></text>
-<% end %>
-<section class="container-fluid top-content">
-  <h1>ギター会員管理データベース</h1>
-  <br>
-  <h4>現在の会員数: <%= @users_num %></h4>
-  <h4>現在の商品数: <%= @products_num %></h4>
-  <h4>現在のイベント数: <%= @events_num %></h4>
-  <%= link_to '全件削除', top_path, :class => 'btn btn-danger', :method => 'delete', data: {confirm: '本当に削除していいですか？' }  %>
-  <hr>
-  <div class="row">
-    <div class="col-sm-12">
-      <h3>ペイパル履歴からのインポート</h3>
-      <%#= form_tag paypals_import_path, multipart: true do %>
-      <%= form_tag csv_import_path, multipart: true do %>
-          <%= file_field_tag :file %>
-        <br>
-        <%= submit_tag 'paypal', :class => 'btn btn-primary' %>
-        <%= submit_tag 'infotop', :class => 'btn btn-primary' %>
-      <% end %>
-    </div>
+<div class="container">
+  <%= notice %>
+  <% if alert %>
+    <text class="text-danger"><%= alert %></text>
+  <% end %>
+  <div class="jumbotron text-center main-background-img">
+    <h2>
+      <font color=red>ギ</font><font color=#ffd700>ター</font><font color=white>の</font><font color=red>レ</font><font color=#ffd700>シピ</font>
+      <br>
+      <font color=white>会員管理データベース</font>
+    </h2>
   </div>
-</section>
+  <section class="container-fluid top-content">
+    <h1>登録情報を見る  <%= link_to '全件削除', top_path, :class => 'btn btn-danger', :method => 'delete', data: {confirm: '本当に削除していいですか？' }  %></h1>
+    <hr>
+    <div class="row">
+      <div class="col col-sm-4">
+        <div class="jumbotron text-center j-top">
+          <p>現在のユーザー数</p>
+          <p><%= @users_num %></p>
+          <%= link_to '一覧を見る' , users_path, :class => 'btn btn-default' %>
+        </div>
+      </div>
+      <div class="col col-sm-4">
+        <div class="jumbotron text-center j-top">
+          <p>現在の商品数</p>
+          <p><%= @products_num %></p>
+          <%= link_to '一覧を見る' , products_path, :class => 'btn btn-default' %>
+        </div>
+      </div>
+      <div class="col col-sm-4">
+        <div class="jumbotron text-center j-top">
+          <p>購入履歴</p>
+          <p><br></p>
+          <%= link_to '一覧を見る' , purchases_path, :class => 'btn btn-default' %>
+        </div>
+      </div>
+    <div/>
+    <div class="row">
+      <!--<h4>現在のイベント数: <%= @events_num %></h4>-->
+      <div class="col-sm-12">
+        <hr class="hr-h1">
+        <br>
+        <h1>検索する</h1>
+        <hr>
+      </div>
+      <div class="col-sm-4">
+        <%= form_tag(result_search_index_path, :method => :get) do %>
+          <table class="table table-hover">
+            <tr>
+              <td>名前</td>
+              <td><%= text_field_tag :name %></td>
+            </tr>
+            <tr>
+              <td>メールアドレス</td>
+              <td><%= text_field_tag :email %></td>
+            </tr>
+          </table>
+          <%= submit_tag "検索" , :class => 'btn btn-default' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <hr class="hr-h1">
+        <br>
+        <h1>登録する</h1>
+        <hr>
+        <h4>CSVから情報をインポートする</h4>
+        <%#= form_tag paypals_import_path, multipart: true do %>
+        <%= form_tag csv_import_path, multipart: true do %>
+            <%= file_field_tag :file %>
+          <br>
+          <%= submit_tag 'paypal履歴からのインポート', :class => 'btn btn-default' %>
+          <%= submit_tag 'infotop履歴からのインポート', :class => 'btn btn-default' %>
+        <% end %>
+      </div>
+    </div>
+  </section>
+</div>

@@ -2,6 +2,24 @@
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
 
-//.top-content {
-    //background-image: image-url("guitar-recipe.jpg");
-//}
+.main-background-img {
+    background-image: image-url("TOP3.jpg");
+    font-family: 'ヒラギノ角ゴ ProN W3', 'Hiragino Kaku Gothic ProN', 'メイリオ', Meiryo, 'ＭＳ Ｐゴシック', 'MS PGothic', 'Helvetica Neue', Helvetica, Arial, Verdana, sans-serif;
+}
+
+.hr-h1 {
+    border: 0.5px solid #0099cc;
+}
+
+.hr-h3 {
+    border: 3px solid #0099cc;
+}
+
+h1 {
+    color: #0099cc;
+    font-weight: 700;
+}
+
+.j-top {
+    background-color: #99ccff;
+}
