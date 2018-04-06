@@ -3,9 +3,8 @@ class SearchController < ApplicationController
     end
     
     def newresult
-      @users = User.all
       @product = Product.find(params[:product][:title])
-      @purchases = Product.find(params[:product][:title]).purchase
+      @purchases = @product.purchase
     end
     
     def result
