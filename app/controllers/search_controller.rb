@@ -1,6 +1,13 @@
 class SearchController < ApplicationController
     def index
     end
+    
+    def newresult
+      @users = User.all
+      @product = Product.find(params[:product][:title])
+      @purchases = Product.find(params[:product][:title]).purchase
+    end
+    
     def result
       sql = create_query(params)
       

@@ -41,7 +41,7 @@
       <div class="col-sm-12">
         <hr class="hr-h1">
         <br>
-        <h1>検索する</h1>
+        <h1>ユーザーを検索する</h1>
         <hr>
       </div>
       <div class="col-sm-4">
@@ -56,6 +56,22 @@
               <td><%= text_field_tag :email %></td>
             </tr>
           </table>
+          <%= submit_tag "検索" , :class => 'btn btn-default' %>
+        <% end %>
+      </div>
+    </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <hr class="hr-h1">
+        <br>
+        <h1>購入履歴から検索する</h1>
+        <hr>
+      </div>
+      <div class="col-sm-4">
+        <%= form_tag(newresult_search_index_path, :method => :get) do %>
+          商品名:  <%= collection_select(:product, :title, Product.all, :id, :title, :include_blank => true) %></td>
+          持っていない: <%= check_box 'page', false %>
+          <br>
           <%= submit_tag "検索" , :class => 'btn btn-default' %>
         <% end %>
       </div>

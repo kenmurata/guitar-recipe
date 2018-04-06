@@ -27,6 +27,7 @@ Rails.application.routes.draw do
     collection do
       # 検索結果の表示
       get :result
+      get :newresult
     end
   end
   
