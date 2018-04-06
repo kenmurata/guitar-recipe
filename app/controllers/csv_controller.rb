@@ -21,7 +21,7 @@ class CsvController < ApplicationController
     CSV.parse(Kconv.toutf8(csv_text), headers: true, return_headers: false) do |row|
       
       # paypal と infotopを判断してそれぞれに合った取り込み方をする
-      if params[:commit] == "paypal"
+      if params[:commit] == "paypal履歴からのインポート"
           
         ### 'ウェブペイメント'以外の場合(支払いの返金や一般の引き出し)はユニーク制約やヌル制約に引っかかるので
         ### とりあえずは無視する。いずれそれ用の処理も入れる必要あり。(paypalの残金を管理する場合必要。)
@@ -126,7 +126,7 @@ class CsvController < ApplicationController
       ################################################
       # ここからinfotopの処理
       ################################################
-      elsif params[:commit] == "infotop"
+      elsif params[:commit] == "infotop履歴からのインポート"
         @total_column += 1
           
         if User.find_by(:email => row[4]) == nil
