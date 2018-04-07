@@ -11,27 +11,27 @@
     </h2>
   </div>
   <section class="container-fluid top-content">
-    <h1>登録情報を見る  <%= link_to '全件削除', top_path, :class => 'btn btn-danger', :method => 'delete', data: {confirm: '本当に削除していいですか？' }  %></h1>
+    <h1>登録情報を見る</h1>
     <hr>
     <div class="row">
       <div class="col col-sm-4">
         <div class="jumbotron text-center j-top">
           <p>現在のユーザー数</p>
-          <p><%= @users_num %></p>
+          <p><%= User.count %>名</p>
           <%= link_to '一覧を見る' , users_path, :class => 'btn btn-default' %>
         </div>
       </div>
       <div class="col col-sm-4">
         <div class="jumbotron text-center j-top">
           <p>現在の商品数</p>
-          <p><%= @products_num %></p>
+          <p><%= Product.count %> 個</p>
           <%= link_to '一覧を見る' , products_path, :class => 'btn btn-default' %>
         </div>
       </div>
       <div class="col col-sm-4">
         <div class="jumbotron text-center j-top">
           <p>購入履歴</p>
-          <p><br></p>
+          <p><%= Purchase.count%>件</p>
           <%= link_to '一覧を見る' , purchases_path, :class => 'btn btn-default' %>
         </div>
       </div>
@@ -45,7 +45,7 @@
         <hr>
       </div>
       <div class="col-sm-4">
-        <%= form_tag(result_search_index_path, :method => :get) do %>
+        <%= form_tag(user_search_search_index_path, :method => :get) do %>
           <table class="table table-hover">
             <tr>
               <td>名前</td>
@@ -67,11 +67,12 @@
         <h1>購入履歴から検索する</h1>
         <hr>
       </div>
-      <div class="col-sm-4">
-        <%= form_tag(newresult_search_index_path, :method => :get) do %>
-          商品名:  <%= collection_select(:product, :title, Product.all, :id, :title, :include_blank => true) %></td>
-          持っていない: <%= check_box 'page', false %>
-          <br>
+      <div class="col-sm-12">
+        <%= form_tag(product_search_search_index_path, :method => :get, :class => "form form-inline") do %>
+          <%= collection_select(:product, :product_id, Product.all, :id, :title, {:prompt => '商品を選択してください'}, {:class => "form-control"}) %>
+          を
+          <%= select(:has_or_not, :has, [['持っている人',"yes"],['持っていない人', "no"]], {}, {:class => "form-control"}) %>
+          <br><br>
           <%= submit_tag "検索" , :class => 'btn btn-default' %>
         <% end %>
       </div>
@@ -92,5 +93,12 @@
         <% end %>
       </div>
     </div>
+    <div class="row">
+      <div class="col-sm-12">
+        <hr class="hr-h1">
+        <br>
+        <h1>削除する</h1>
+        <%= link_to '全件削除', top_path, :class => 'btn btn-danger', :method => 'delete', data: {confirm: '本当に削除していいですか？' }  %>
+      </div>
   </section>
 </div>

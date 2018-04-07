@@ -26,8 +26,8 @@ Rails.application.routes.draw do
   resources :search, only: [:index] do
     collection do
       # 検索結果の表示
-      get :result
-      get :newresult
+      get :user_search
+      get :product_search
     end
   end
   

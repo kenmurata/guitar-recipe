@@ -2,16 +2,51 @@ class SearchController < ApplicationController
     def index
     end
     
-    def newresult
-      @product = Product.find(params[:product][:title])
+    ### 購入履歴から検索
+    def product_search
+      
+      # 購入履歴に存在するuser_idを格納する配列
+      user_ids = []
+      @users_data = []
+      
+      # 商品ID
+      @product = Product.find(params[:product][:product_id])
+      
+      # 商品の購入履歴一覧を取得
       @purchases = @product.purchase
+      
+      # 購入履歴に含まれているユーザ一覧を取得
+      @purchases.each do |purchase|
+        user_ids << purchase.user_id
+      end
+      
+      # 持っている人 or いない人で条件分岐
+      if params[:has_or_not][:has] == "yes"
+        
+        ## 検索条件が[持っている人]の場合の処理
+        # 購入履歴に含まれているユーザオブジェクトを全て取得
+        users = User.find(user_ids)
+        users.each do |user|
+          @users_data << [user.name, user.email]
+        end
+        
+      else
+        
+        ## 検索条件が[持っていない人]の場合の処理
+        @users_data = User.all.pluck(:name, :email)
+        
+        # 持っている人を@usersの配列から決していく
+        user_ids.each do |user_id|
+          @users_data.delete_at(user_id - 1)
+        end
+      end
     end
     
-    def result
+    ### ユーザ情報から検索
+    def user_search
       sql = create_query(params)
       
       # ヒットしたユーザの一覧が@usersに入る
-      #@users = User.where(sql)
       @users = User.where(sql).order('id desc')
       
       # ユーザの情報を表示するためのカラムを準備
@@ -27,7 +62,6 @@ class SearchController < ApplicationController
       
       # 購入履歴を表示するための情報
       @purchases = Purchase.all
-      #@product_names = Product.pluck(:id,:name)
       @products = Product.all
       
     end

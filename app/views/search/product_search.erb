@@ -1,0 +1,25 @@
+<section class="container-fluid"><div class="row"><div class="col-sm-12 col-md-12 col-lg-12">
+  <h1>「<%= @product.title %>」 を持っている人</h1>
+  検索結果: <%= @users_data.count %>件<br>
+  <% if @users_data.count != 0 %>
+    <table class="table table-hover table-bordered">
+      <thead class="thead-default">
+        <tr>
+          <th class="info">名前</th>
+          <th class="info">メールアドレス</th>
+        </tr>
+      </thead>
+      <!--### ユーザ毎に繰り返し ###-->
+      <% @users_data.each do |user_data| %>
+        <tr>
+          <td><%= user_data[0] %></td>
+          <td><%= user_data[1] %></td>
+        </tr>
+      <% end %>
+    </table>
+  </div></div></section>
+<% else %>
+  <p>購入したユーザは存在しませんでした</p>
+<% end %>
+<%= link_to '戻る' , :back, :class => 'btn btn-default' %>
+<%= link_to 'TOP' , root_path, :class => 'btn btn-default' %>
