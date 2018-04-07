@@ -30,6 +30,9 @@ class SearchController < ApplicationController
           @users_data << [user.name, user.email]
         end
         
+        # 表示する内容(いる or いない)
+        @message = "いる"
+        
       else
         
         ## 検索条件が[持っていない人]の場合の処理
@@ -39,6 +42,9 @@ class SearchController < ApplicationController
         user_ids.each do |user_id|
           @users_data.delete_at(user_id - 1)
         end
+        
+        # 表示する内容(いる or いない)
+        @message = "いない"
       end
     end
     
