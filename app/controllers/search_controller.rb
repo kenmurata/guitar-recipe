@@ -27,7 +27,7 @@ class SearchController < ApplicationController
         # 購入履歴に含まれているユーザオブジェクトを全て取得
         users = User.find(user_ids)
         users.each do |user|
-          @users_data << [user.name, user.email]
+          @users_data << {:id => user.id, :name => user.name, :email => user.email}
         end
         
         # 表示する内容(いる or いない)
@@ -35,12 +35,27 @@ class SearchController < ApplicationController
         
       else
         
-        ## 検索条件が[持っていない人]の場合の処理
-        @users_data = User.all.pluck(:name, :email)
+        ### 検索条件が[持っていない人]の場合の処理
+        ### 全ユーザの情報を一度取得し、その後購入しているユーザの情報だけ削除する
+        users_data_array = User.all.pluck(:id, :name, :email)
         
-        # 持っている人を@usersの配列から決していく
-        user_ids.each do |user_id|
-          @users_data.delete_at(user_id - 1)
+        ### 購入していないユーザの情報だけを@users_dataに格納するループ
+        users_data_array.each do |u|
+          
+          # 持っているかどうかの判定フラグ. 0 = 持っていない
+          flag = 0
+          
+          # 持っているかの判定。持っているリスト分ループし、idが一致すればflag = 1
+          user_ids.each do |uid|
+            if u[0] == uid
+              flag = 1
+            end
+          end
+          
+          # 持っていない(flag==0)なら持っていないリストに情報を代入
+          if flag == 0
+            @users_data << {:id => u[0], :name => u[1], :email => u[2]}
+          end
         end
         
         # 表示する内容(いる or いない)

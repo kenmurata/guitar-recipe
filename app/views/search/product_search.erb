@@ -12,8 +12,8 @@
       <!--### ユーザ毎に繰り返し ###-->
       <% @users_data.each do |user_data| %>
         <tr>
-          <td><%= user_data[0] %></td>
-          <td><%= user_data[1] %></td>
+          <td><%= user_data[:name] %></td>
+          <td><%= user_data[:email] %></td>
         </tr>
       <% end %>
     </table>
