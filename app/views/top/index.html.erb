@@ -69,7 +69,8 @@
       </div>
       <div class="col-sm-12">
         <%= form_tag(product_search_search_index_path, :method => :get, :class => "form form-inline") do %>
-          <%= collection_select(:product, :product_id, Product.all, :id, :title, {:prompt => '商品を選択してください'}, {:class => "form-control"}) %>
+          <%#= collection_select(:product, :product_id, Product.all, :id, :title, {:prompt => '商品を選択してください'}, {:class => "form-control"}) %>
+          <%= collection_select(:product, :product_id, Product.all, :id, :title, {}, {:class => "form-control"}) %>
           を
           <%= select(:has_or_not, :has, [['持っている人',"yes"],['持っていない人', "no"]], {}, {:class => "form-control"}) %>
           <br><br>
@@ -98,6 +99,7 @@
         <hr class="hr-h1">
         <br>
         <h1>削除する</h1>
+        <hr>
         <%= link_to '全件削除', top_path, :class => 'btn btn-danger', :method => 'delete', data: {confirm: '本当に削除していいですか？' }  %>
       </div>
   </section>
