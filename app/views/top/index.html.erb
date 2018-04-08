@@ -1,8 +1,4 @@
 <div class="container">
-  <%= notice %>
-  <% if alert %>
-    <text class="text-danger"><%= alert %></text>
-  <% end %>
   <div class="jumbotron text-center main-background-img">
     <h2>
       <font color=red>ギ</font><font color=#ffd700>ター</font><font color=white>の</font><font color=red>レ</font><font color=#ffd700>シピ</font>
@@ -10,6 +6,18 @@
       <font color=white>会員管理データベース</font>
     </h2>
   </div>
+  
+  <%# エラーメッセージ等の出力 %>
+  <h2>
+    <% if notice %>
+      <text class ="text-success">メッセージ: <%= notice %></text>
+    <% end %>
+    <% if alert %>
+      <text class="text-danger">エラー: <%= alert %></text>
+    <% end %>
+  </h2>
+  
+  <%# 本文 %>
   <section class="container-fluid top-content">
     <h1>登録情報を見る</h1>
     <hr>
