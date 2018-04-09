@@ -79,8 +79,6 @@ class SearchController < ApplicationController
         end
       end
       
-      p @user_column
-      
       # 購入履歴を表示するための情報
       @purchases = Purchase.all
       @products = Product.all
